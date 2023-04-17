@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.happypet.service.FirebasePushNotificationService;
 import com.happypet.R;
 import com.happypet.fragments.CartFragment;
 import com.happypet.fragments.HomeFragment;
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Register push notification service
+        Intent intentBackgroundService = new Intent(this, FirebasePushNotificationService.class);
+        startService(intentBackgroundService);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
