@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practice Four</string>
+    <string name="app_name">Happy Pet App</string>
 
     <!-- Strings for the LoginActivity -->
     <string name="text_view_user">User name or Email</string>
@@ -10,7 +10,6 @@
     <!-- Strings for the SignUpActivity -->
     <string name="sign_up_button_sign_up">Sign Up!</string>
     <string name="text_view_password_confirm">Confirm Password</string>
-
 
     <!-- Strings for the item_product layout (Recycler View) -->
     <string name="name">Name</string>
