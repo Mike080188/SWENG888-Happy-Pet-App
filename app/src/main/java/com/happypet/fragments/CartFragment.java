@@ -49,7 +49,8 @@ public class CartFragment extends Fragment {
         String uid = mFirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //Get the cart for this user
-        userCartDbRef = FirebaseDatabase.getInstance().getReference("carts").child(uid);
+        userCartDbRef = FirebaseDatabase.getInstance().getReference().child("users").
+                child(uid).child("cart");
 
         userCartDbRef.addValueEventListener(new ValueEventListener() {
             @Override

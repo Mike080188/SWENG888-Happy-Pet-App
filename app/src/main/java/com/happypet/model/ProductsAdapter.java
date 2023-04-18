@@ -47,7 +47,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         // Get user's uid and the DB reference for their cart
         String uid = mFirebaseAuth.getInstance().getCurrentUser().getUid();
-        cartDbRef = FirebaseDatabase.getInstance().getReference().child("carts").child(uid);
+        cartDbRef = FirebaseDatabase.getInstance().getReference().child("users").
+                child(uid).child("cart");
 
         cardView.setUseCompatPadding(true); // Optional: adds padding for pre-lollipop devices
         return new ProductViewHolder(view);
@@ -77,7 +78,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         private TextView mNameTextView;
-        private TextView mSellerTextView;
+        private TextView mStoreTextView;
         private TextView mDescriptionDateTextView;
         private TextView mPriceTextView;
         private Button mAddToCartTextView;
@@ -85,7 +86,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.name_text_view);
-            mSellerTextView = itemView.findViewById(R.id.seller_text_view);
+            mStoreTextView = itemView.findViewById(R.id.store_name_text_view);
             mDescriptionDateTextView = itemView.findViewById(R.id.description_text_view);
             mPriceTextView = itemView.findViewById(R.id.price_text_view);
             mAddToCartTextView = itemView.findViewById(R.id.add_to_cart_text_view);
@@ -93,7 +94,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         public void bind(Product product) {
             mNameTextView.setText(product.getName());
-            mSellerTextView.setText("Seller: " + product.getSeller());
+            mStoreTextView.setText("Store: " + product.getStoreName());
             mDescriptionDateTextView.setText("Description: " + product.getDescription());
             mPriceTextView.setText("Price: "+ product.getPrice().toString());
             mAddToCartTextView.setText("Add to Cart");
@@ -116,13 +117,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                     if(task.getResult().exists()) {
                         // Item is in cart, increment quantity.
                         int quantity = task.getResult().getValue(Integer.class);
-                        CartItem item = new CartItem(quantity + 1, product.getName(), product.getSeller(), product.getDescription(), product.getPrice());
+                        CartItem item = new CartItem(quantity + 1, product.getName(),
+                                product.getDescription(), product.getPrice(), product.getStoreName(),
+                                product.getStoreAddress());
                         prodCartDbRef.setValue(item);
                     }
                     else {
                         // Add new item to cart with quantity = 1
                         int quantity = 1;
-                        CartItem item = new CartItem(quantity, product.getName(), product.getSeller(), product.getDescription(), product.getPrice());
+                        CartItem item = new CartItem(quantity, product.getName(),
+                                product.getDescription(), product.getPrice(), product.getStoreName(),
+                                product.getStoreAddress());
                         prodCartDbRef.setValue(item);
                     }
                     Toast.makeText(mContext, "Item Added to Cart", Toast.LENGTH_SHORT).show();

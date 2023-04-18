@@ -36,7 +36,7 @@
             android:layout_marginTop="8dp"/>
 
         <TextView
-            android:id="@+id/seller_text_view"
+            android:id="@+id/store_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -53,7 +53,7 @@
             android:textSize="16sp"
             android:textStyle="normal"
             android:textColor="@color/black"
-            android:layout_below="@id/seller_text_view"
+            android:layout_below="@id/store_name_text_view"
             android:layout_toRightOf="@id/item_image"
             android:layout_marginTop="8dp"/>
 
