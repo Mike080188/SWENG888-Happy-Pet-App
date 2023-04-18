@@ -47,7 +47,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
         // Get DB ref for the user's cart
         String uid = mFirebaseAuth.getInstance().getCurrentUser().getUid();
-        cartDbRef = FirebaseDatabase.getInstance().getReference().child("carts").child(uid);
+        cartDbRef = FirebaseDatabase.getInstance().getReference().child("users").
+                child(uid).child("cart");
 
         cardView.setUseCompatPadding(true); // Optional: adds padding for pre-lollipop devices
         return new CartItemViewHolder(view);
@@ -77,7 +78,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
     static class CartItemViewHolder extends RecyclerView.ViewHolder {
         private TextView mNameTextView;
-        private TextView mSellerTextView;
+        private TextView mStoreTextView;
         private TextView mDescriptionDateTextView;
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
@@ -86,7 +87,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         public CartItemViewHolder(@NonNull View itemView) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.cart_name_text_view);
-            mSellerTextView = itemView.findViewById(R.id.cart_seller_text_view);
+            mStoreTextView = itemView.findViewById(R.id.cart_store_name_text_view);
             mDescriptionDateTextView = itemView.findViewById(R.id.cart_description_text_view);
             mPriceTextView = itemView.findViewById(R.id.cart_price_text_view);
             mQuantityTextView = itemView.findViewById(R.id.cart_quantity_text_view);
@@ -95,7 +96,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
         public void bind(CartItem item) {
             mNameTextView.setText(item.getName());
-            mSellerTextView.setText("Seller: "+item.getSeller());
+            mStoreTextView.setText("Store: "+item.getStoreName());
             mDescriptionDateTextView.setText("Description: "+item.getDescription());
             mPriceTextView.setText("Price: "+item.getPrice().toString());
             mQuantityTextView.setText("Quantity: "+item.getQuantity());
@@ -126,7 +127,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                 }
                 else {
                     // Decrement quantity
-                    CartItem item = new CartItem(quantity - 1, cartItem.getName(), cartItem.getSeller(), cartItem.getDescription(), cartItem.getPrice());
+                    CartItem item = new CartItem(quantity - 1, cartItem.getName(),
+                            cartItem.getDescription(), cartItem.getPrice(), cartItem.getStoreName(),
+                            cartItem.getStoreAddress());
                     prodCartDbRef.setValue(item);
                 }
                 Toast.makeText(mContext, "Item Removed from Cart", Toast.LENGTH_SHORT).show();
