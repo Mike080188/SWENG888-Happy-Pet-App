@@ -3,6 +3,7 @@ package com.happypet.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.happypet.fragments.PetStoreOrderingFragment;
 import com.happypet.service.FirebasePushNotificationService;
 import com.happypet.R;
 import com.happypet.fragments.CartFragment;
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.nav_products:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductsFragment()).commit();
+                break;
+            case R.id.nav_order:
+                Log.d("Order Navigation Item", "selected");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PetStoreOrderingFragment()).commit();
                 break;
             case R.id.nav_cart:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CartFragment()).commit();

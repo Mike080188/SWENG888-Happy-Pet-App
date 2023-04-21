@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities_array">
+        <item>Exton</item>
+        <item>Phoenixville</item>
+        <item>Philadelphia</item>
+        <item>West Chester</item>
+        <item>Harleysville</item>
+        <item>View All Pet Stores</item>
+    </string-array>
+</resources>

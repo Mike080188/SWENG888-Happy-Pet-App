@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pet_store_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/pet_store_image"
+            android:src="@drawable/rabbit"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"/>
+
+        <TextView
+            android:id="@+id/pet_store_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/pet_store_image"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:text="Pet Store Name"/>
+
+        <Button
+            android:id="@+id/pet_store_view_products_button"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@color/off_white"
+            android:text="View Products"
+            android:layout_below="@id/pet_store_image"
+            android:layout_marginTop="8dp"
+            android:textSize="13sp"/>
+        <Button
+            android:id="@+id/pet_store_order_show_map"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@color/off_white"
+            android:text="Show on Map"
+            android:layout_below="@id/pet_store_image"
+            android:layout_toRightOf="@id/pet_store_view_products_button"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="13sp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="left">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/pet_store_order_search"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:tooltipText="Search pet stores by address">
+        </androidx.appcompat.widget.SearchView>
+
+        <Spinner
+            android:id="@+id/pet_store_order_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="300dp"
+            android:tooltipText="Filter pet stores by city"
+            android:spinnerMode="dropdown">
+
+        </Spinner>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pet_store_order_home_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pet Stores"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pet_store_order_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
