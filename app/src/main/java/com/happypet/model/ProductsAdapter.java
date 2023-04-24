@@ -1,6 +1,7 @@
 package com.happypet.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.happypet.activity.ReviewActivity;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public ProductsAdapter(List<Product> products) {
         mProducts = products;
     }
+
 
     @NonNull
     @Override
@@ -63,6 +66,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 AddProductToCart(product);
             }
         });
+        holder.mLeaveReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {goToLeaveReviewActivity(product);}
+        });
         holder.bind(product);
     }
 
@@ -82,6 +89,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private TextView mDescriptionDateTextView;
         private TextView mPriceTextView;
         private Button mAddToCartTextView;
+        private Button mLeaveReviewButton;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +98,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             mDescriptionDateTextView = itemView.findViewById(R.id.description_text_view);
             mPriceTextView = itemView.findViewById(R.id.price_text_view);
             mAddToCartTextView = itemView.findViewById(R.id.add_to_cart_text_view);
+            mLeaveReviewButton = itemView.findViewById(R.id.leave_a_review_text_view);
         }
 
         public void bind(Product product) {
@@ -98,6 +107,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             mDescriptionDateTextView.setText("Description: " + product.getDescription());
             mPriceTextView.setText("Price: "+ product.getPrice().toString());
             mAddToCartTextView.setText("Add to Cart");
+            mLeaveReviewButton.setText("Leave A Review");
         }
     }
 
@@ -135,6 +145,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             }
         });
 
+    }
+    public void goToLeaveReviewActivity(Product product){
+        Intent intent = new Intent(mContext, ReviewActivity.class);
+        intent.putExtra("productToReview",product);
+        mContext.startActivity(intent);
     }
 
 }

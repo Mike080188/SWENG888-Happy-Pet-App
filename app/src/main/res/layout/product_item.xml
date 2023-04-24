@@ -70,15 +70,24 @@
 
         <Button
             android:id="@+id/add_to_cart_text_view"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:background="@color/off_white"
             android:text="Select Item"
             android:layout_below="@id/price_text_view"
-            android:layout_toRightOf="@id/item_image"
             android:layout_marginTop="8dp"
             android:textSize="13sp"/>
-
+        <Button
+            android:id="@+id/leave_a_review_text_view"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@color/off_white"
+            android:text="Leave A Review"
+            android:layout_below="@id/price_text_view"
+            android:layout_toRightOf="@id/add_to_cart_text_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="13sp"/>
 
 
     </RelativeLayout>
