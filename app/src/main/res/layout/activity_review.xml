@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ReviewActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave A Review:"
+        android:textSize="30dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/review_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Product Name:"
+        android:textSize="25dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/review_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Product Description:"
+        android:textSize="18dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/review_seller_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Product Seller:"
+        android:textSize="18dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/review_price_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Product Price:"
+        android:textSize="18dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/review_prompt_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Product Rating:"
+        android:textSize="18dp">
+
+    </TextView>
+    <RatingBar
+        android:id="@+id/review_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/review_comments_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave comments on your rating here...">
+
+    </EditText>
+    <Button
+        android:id="@+id/review_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Confirm Review">
+
+    </Button>
+    <Button
+        android:id="@+id/share_on_twitter_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Share Review on Twitter">
+
+    </Button>
+
+</LinearLayout>

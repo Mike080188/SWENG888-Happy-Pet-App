@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "287633799543-1k3lgjogp3itkqbfjiqfr9svt9077h2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.happypet",
+            "certificate_hash": "453ccb6b70da6e72c8fc00fea14f470234c37140"
+          }
+        },
+        {
           "client_id": "287633799543-73drjpms5a080rd59pt9mintrso79ti9.apps.googleusercontent.com",
           "client_type": 3
         }
