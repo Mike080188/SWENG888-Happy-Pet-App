@@ -89,7 +89,7 @@ public class ReviewActivity extends AppCompatActivity {
         return newReview;
     }
     private void shareReview(Review sharedReview){
-        String message = "Product: "+reviewProduct.getName()+"\nSeller: "+reviewProduct.getStoreName()+
+        String message = "I used the Happy Pet App to order this product! Here is my review: \n"+"Product: "+reviewProduct.getName()+"\nSeller: "+reviewProduct.getStoreName()+
                "\nPrice: "+String.valueOf(reviewProduct.getPrice()) +"\nRating: " + String.valueOf(sharedReview.getRating()) +"\nReview: "+
                 sharedReview.getComments();
         Intent intent = new Intent(Intent.ACTION_SEND);
