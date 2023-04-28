@@ -2,11 +2,16 @@ package com.happypet.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +28,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.happypet.activity.ReviewActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
@@ -88,6 +98,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private TextView mStoreTextView;
         private TextView mDescriptionDateTextView;
         private TextView mPriceTextView;
+        private ImageView mItemImageView;
         private Button mAddToCartTextView;
         private Button mLeaveReviewButton;
 
@@ -97,6 +108,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             mStoreTextView = itemView.findViewById(R.id.store_name_text_view);
             mDescriptionDateTextView = itemView.findViewById(R.id.description_text_view);
             mPriceTextView = itemView.findViewById(R.id.price_text_view);
+            mItemImageView = itemView.findViewById(R.id.item_image);
             mAddToCartTextView = itemView.findViewById(R.id.add_to_cart_text_view);
             mLeaveReviewButton = itemView.findViewById(R.id.leave_a_review_text_view);
         }
@@ -106,6 +118,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             mStoreTextView.setText("Store: " + product.getStoreName());
             mDescriptionDateTextView.setText("Description: " + product.getDescription());
             mPriceTextView.setText("Price: "+ product.getPrice().toString());
+            setImageBitmap(product.getImageUri(), mItemImageView);
             mAddToCartTextView.setText("Add to Cart");
             mLeaveReviewButton.setText("Leave A Review");
         }
@@ -151,6 +164,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         intent.putExtra("productToReview",product);
         mContext.startActivity(intent);
     }
-
+    /*helper method for handling setting the Bitmap of the imageView of the ViewHolder for the item to a
+        Bitmap created by retrieving the image on a different thread at the stored URL for the product image*/
+    private static void setImageBitmap(String imageURL, ImageView imageView){
+        Executor executor = Executors.newSingleThreadExecutor();
+        Handler handler = new android.os.Handler(Looper.getMainLooper());
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    InputStream inputStream = new URL(imageURL).openStream();
+                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(image);
+                        }
+                    });
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
 

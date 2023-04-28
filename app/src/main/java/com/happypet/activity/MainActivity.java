@@ -63,8 +63,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mActionBarDrawerToggle.syncState();
 
         /** Step 7:Set the default fragment to the HomeFragment */
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new HomeFragment()).commit();
+        if(getIntent().getBooleanExtra("cartFragmentFlag",false)!=true){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment()).commit();
+        }else{
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new CartFragment()).commit();
+        }
     }
 
     @Override
