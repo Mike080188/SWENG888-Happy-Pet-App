@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CheckOutActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/baseline_shopping_cart_checkout_24"
+        android:layout_gravity="center_horizontal">
+    </ImageView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHECKOUT"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/dark_green">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/dark_green"
+        android:text="Total:"
+        android:textSize="30dp"
+        android:textAlignment="center">
+    </TextView>
+
+    <TextView
+        android:id="@+id/total_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="$"
+        android:textAlignment="center"
+        android:textColor="@color/dark_green"
+        android:textSize="30dp"></TextView>
+
+    <Button
+        android:id="@+id/checkout_button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textAlignment="center"
+        android:text="checkout"
+        android:textSize="30dp"
+        android:layout_marginTop="90dp">
+    </Button>
+
+</LinearLayout>

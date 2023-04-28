@@ -6,11 +6,10 @@ public class Product implements Serializable {
     
 //    private String title;
     private String name;
-    private String seller;
+    private String storeName;
     private String description;
     private Double price;
     private String storeAddress;
-    private String storeName;
     private String imageUri;
     private String Key;
 
@@ -19,11 +18,13 @@ public class Product implements Serializable {
     }
 
 
-    public Product(String name, String seller, String description, Double price) {
+    public Product(String name, String storeName, String description, Double price, String storeAddress, String imageUri) {
         this.name = name;
-        this.seller = seller;
+        this.storeName = storeName;
         this.description = description;
         this.price = price;
+        this.storeAddress = storeAddress;
+        this.imageUri = imageUri;
     }
 
     /** Getters and Setters */

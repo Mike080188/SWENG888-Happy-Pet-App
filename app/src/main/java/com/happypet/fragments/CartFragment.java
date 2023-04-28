@@ -1,6 +1,7 @@
 package com.happypet.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.happypet.CheckOutActivity;
 import com.happypet.R;
 import com.happypet.model.CartItem;
 import com.happypet.model.CartItemAdapter;
@@ -33,6 +36,8 @@ public class CartFragment extends Fragment {
     private DatabaseReference userCartDbRef;
     private FirebaseAuth mFirebaseAuth;
     private CartItemAdapter mCartItemAdapter;
+    private FloatingActionButton mGoToCheckoutButton;
+    private Double total = 0.00;
 
     @Nullable
     @Override
@@ -61,6 +66,7 @@ public class CartFragment extends Fragment {
                     // Set key for cart item, which is the equal to the product key it represents
                     cartItem.setKey(dataSnapshot.getKey());
                     cartItems.add(cartItem);
+                    total+=cartItem.getPrice();
                 }
                 mCartItemAdapter = new CartItemAdapter(cartItems);
                 mRecyclerView.setAdapter(mCartItemAdapter);
@@ -79,7 +85,15 @@ public class CartFragment extends Fragment {
                 Log.e("ProductsFragment", "Error retrieving products from database", error.toException());
             }
         });
-
+        mGoToCheckoutButton = view.findViewById(R.id.go_to_checkout_button);
+        mGoToCheckoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CheckOutActivity.class);
+                intent.putExtra("total",total);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
