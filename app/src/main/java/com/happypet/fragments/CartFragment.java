@@ -49,8 +49,7 @@ public class CartFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.cart_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        /** Implement the Call to FirebaseProductDAO */
-
+        /** Get the users UID*/
         String uid = mFirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //Get the cart for this user
@@ -61,12 +60,13 @@ public class CartFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<CartItem> cartItems = new ArrayList<>();
+                total = 0.0;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     CartItem cartItem = dataSnapshot.getValue(CartItem.class);
                     // Set key for cart item, which is the equal to the product key it represents
                     cartItem.setKey(dataSnapshot.getKey());
                     cartItems.add(cartItem);
-                    total+=cartItem.getPrice();
+                    total+= cartItem.getPrice() * cartItem.getQuantity();
                 }
                 mCartItemAdapter = new CartItemAdapter(cartItems);
                 mRecyclerView.setAdapter(mCartItemAdapter);
