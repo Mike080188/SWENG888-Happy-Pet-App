@@ -13,13 +13,14 @@ public class CartItem {
 
     private String Key;
 
-    public CartItem(int quantity, String name, String description, Double price, String storeName, String storeAddress) {
+    public CartItem(int quantity, String name, String description, Double price, String storeName, String storeAddress, String imageUri) {
         this.quantity = quantity;
         this.name = name;
         this.description = description;
         this.price = price;
         this.storeName = storeName;
         this.storeAddress = storeAddress;
+        this.imageUri = imageUri;
     }
 
     public CartItem() {

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.happypet.R;
 
 public class HomeFragment extends Fragment {
@@ -18,13 +19,14 @@ public class HomeFragment extends Fragment {
 
     View root;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_home, container, false);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         mTextViewEmail = root.findViewById(R.id.text_view_email);
-        String email = getActivity().getIntent().getStringExtra("email");
         mTextViewEmail.setText("User: " + email);
 
         return root;
