@@ -1,11 +1,16 @@
 package com.happypet.model;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +26,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
 
@@ -82,6 +92,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         private TextView mDescriptionDateTextView;
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
+
+        private ImageView mItemImageView;
         private Button mRemoveFromCartButton;
 
         public CartItemViewHolder(@NonNull View itemView) {
@@ -91,6 +103,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             mDescriptionDateTextView = itemView.findViewById(R.id.cart_description_text_view);
             mPriceTextView = itemView.findViewById(R.id.cart_price_text_view);
             mQuantityTextView = itemView.findViewById(R.id.cart_quantity_text_view);
+            mItemImageView = itemView.findViewById(R.id.cart_item_image);
             mRemoveFromCartButton = itemView.findViewById(R.id.remove_from_cart_button);
         }
 
@@ -99,6 +112,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             mStoreTextView.setText("Store: "+item.getStoreName());
             mDescriptionDateTextView.setText("Description: "+item.getDescription());
             mPriceTextView.setText("Price: "+item.getPrice().toString());
+            setImageBitmap(item.getImageUri(), mItemImageView);
             mQuantityTextView.setText("Quantity: "+item.getQuantity());
             mRemoveFromCartButton.setText("Remove Item");
         }
@@ -129,10 +143,32 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                     // Decrement quantity
                     CartItem item = new CartItem(quantity - 1, cartItem.getName(),
                             cartItem.getDescription(), cartItem.getPrice(), cartItem.getStoreName(),
-                            cartItem.getStoreAddress());
+                            cartItem.getStoreAddress(), cartItem.getImageUri());
                     prodCartDbRef.setValue(item);
                 }
                 Toast.makeText(mContext, "Item Removed from Cart", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private static void setImageBitmap(String imageURL, ImageView imageView){
+        Executor executor = Executors.newSingleThreadExecutor();
+        Handler handler = new android.os.Handler(Looper.getMainLooper());
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    InputStream inputStream = new URL(imageURL).openStream();
+                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(image);
+                        }
+                    });
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
         });
     }

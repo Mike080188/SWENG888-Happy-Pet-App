@@ -142,7 +142,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         int quantity = task.getResult().getValue(Integer.class);
                         CartItem item = new CartItem(quantity + 1, product.getName(),
                                 product.getDescription(), product.getPrice(), product.getStoreName(),
-                                product.getStoreAddress());
+                                product.getStoreAddress(), product.getImageUri());
                         prodCartDbRef.setValue(item);
                     }
                     else {
@@ -150,7 +150,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         int quantity = 1;
                         CartItem item = new CartItem(quantity, product.getName(),
                                 product.getDescription(), product.getPrice(), product.getStoreName(),
-                                product.getStoreAddress());
+                                product.getStoreAddress(), product.getImageUri());
                         prodCartDbRef.setValue(item);
                     }
                     Toast.makeText(mContext, "Item Added to Cart", Toast.LENGTH_SHORT).show();

@@ -26,8 +26,6 @@ import com.happypet.activity.MainActivity;
 import com.happypet.model.PetStore;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -44,7 +42,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public LatLng petStoreCoordinates;
-
 
 
     // [START maps_activity_on_create]
