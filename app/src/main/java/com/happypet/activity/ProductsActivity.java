@@ -49,7 +49,8 @@ public class ProductsActivity extends AppCompatActivity {
         cartButton.show();
 
 
-        /** Implement the Call to FirebaseProductDAO */
+        /** Implement the Call to FirebaseProductDAO  - retrieves proudcuts from database and filters
+         * by pet store*/
 
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("products");
         List<Product> petStoreProductList = new ArrayList<>();

@@ -49,13 +49,15 @@ public class ReviewActivity extends AppCompatActivity {
 
         //Set all fields for the selected product
         reviewProduct = (Product) getIntent().getSerializableExtra("productToReview");
-        mProductPriceTV.setText(reviewProduct.getName());
+        mProductNameTV.setText(reviewProduct.getName());
         mProductDescriptionTV.setText(reviewProduct.getDescription());
         mProductSellerTV.setText(reviewProduct.getStoreName());
         mProductPriceTV.setText(reviewProduct.getPrice().toString());
 
         reviewDBReference = FirebaseDatabase.getInstance().getReference("reviews");
 
+    /** sets up buttons for user to leave a review that is stored in our Firebase Realtime DB and
+     * if desired, shared with other apps like social media*/
         mLeaveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,12 +76,13 @@ public class ReviewActivity extends AppCompatActivity {
 
 
     }
-
+    /** Helper method that inserts the user review in Firebase Realtime DB*/
     //handles insertion of new store information to Realtime DB
     private void insertReview(Review newReview){
         reviewDBReference.push().setValue(newReview);
         Toast.makeText(ReviewActivity.this, "Review has been added",Toast.LENGTH_SHORT).show();
     }
+    /** Helper method that constructs a Review Data object from the user-entered data*/
     private Review makeReview(){
         String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String productKey = reviewProduct.getKey();
@@ -88,6 +91,7 @@ public class ReviewActivity extends AppCompatActivity {
         Review newReview = new Review(userID,productKey,rating,comments);
         return newReview;
     }
+    /** Using implicit intent to share the review with other apps like Twitter or Gmail*/
     private void shareReview(Review sharedReview){
         String message = "I used the Happy Pet App to order this product! Here is my review: \n"+"Product: "+reviewProduct.getName()+"\nSeller: "+reviewProduct.getStoreName()+
                "\nPrice: "+String.valueOf(reviewProduct.getPrice()) +"\nRating: " + String.valueOf(sharedReview.getRating()) +"\nReview: "+

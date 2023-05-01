@@ -55,7 +55,8 @@ public class CartFragment extends Fragment {
         //Get the cart for this user
         userCartDbRef = FirebaseDatabase.getInstance().getReference().child("users").
                 child(uid).child("cart");
-
+        /** Retrieves and materializes user's cart items from database and calculates total price
+         * of their cart for checkout*/
         userCartDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,6 +86,7 @@ public class CartFragment extends Fragment {
                 Log.e("ProductsFragment", "Error retrieving products from database", error.toException());
             }
         });
+        /** Uses floating action button for user to got to checkoutActivity*/
         mGoToCheckoutButton = view.findViewById(R.id.go_to_checkout_button);
         mGoToCheckoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

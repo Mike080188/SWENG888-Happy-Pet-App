@@ -69,11 +69,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     * Puts a marker at the selected pet store's location, upon clicking the marker, the user can
+     * click a button to launch google maps app to give them directions there
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -87,7 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
+    /** Gets selected pet store passed as intent extra from PetStoreOrderingFragment*/
     private void setSelectedPetStore() {
         /*Gets the intent passed from MainActivity and the selected patent passed in the extra */
         Intent intent = getIntent();
@@ -98,7 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Toast.makeText(MapsActivity.this,"MapsActivity failed to retrieve pet store",Toast.LENGTH_SHORT).show();
         }
     }
-
+    /** Using geocoder to get coordinates based on the selected pet store's address*/
     private void setCoordinates(String address){
         Geocoder geocoder = new Geocoder(this);
 
@@ -126,11 +123,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         });
-
-
-
-
-
     }
 
 }

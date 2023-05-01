@@ -67,7 +67,8 @@ public class PetStoreOrderingFragment extends Fragment {
 
 
 
-        /** Implement the Call to FirebaseProductDAO */
+        /** Implement the Call to FirebaseProductDAO - retrieves and materializes all pet stores,
+         * sets adapter for recycler view to all pet stores */
 
         firebasePetStores = FirebaseDatabase.getInstance().getReference("stores");
 
@@ -91,7 +92,7 @@ public class PetStoreOrderingFragment extends Fragment {
                 Log.e("PetStoreOrderingFragment", "Error retrieving products from database", error.toException());
             }
         });
-        /* Set OnItemSelectedListener for spinner */
+        /** Set OnItemSelectedListener for spinner for user to filter pet stores by city*/
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -119,6 +120,7 @@ public class PetStoreOrderingFragment extends Fragment {
                 mRecyclerView.setAdapter(mPetStoreAdapter);
             }
         });
+        /** Sets listener for user submitting query to filter pet stores by name*/
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -141,7 +143,8 @@ public class PetStoreOrderingFragment extends Fragment {
                 }
                 return false;
             }
-
+            /** sets up searchbar to filter pet stores by name with each new character the user
+             * types*/
             @Override
             public boolean onQueryTextChange(String newText) {
                 List<PetStore> petStoresMatchingQuery = new ArrayList<>();

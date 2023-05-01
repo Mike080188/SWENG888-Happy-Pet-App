@@ -43,7 +43,7 @@ public class ProductsFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        /** Implement the Call to FirebaseProductDAO */
+        /** Implement the Call to FirebaseProductDAO - retrieves all products*/
 
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("products");
 
