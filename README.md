@@ -1,5 +1,10 @@
 THE HAPPY PET APPLICATION
 
+Project Description
+
+The Happy Pet Application is an acedemic Android group project. The Happy Pet application focuses on exposing users to the wide variety of pet products
+available at small pet stores while also providing directions to these pet store locations. The app is meant as a proof of concept and not intended for production use.
+
 Mission Statement
 
 The Happy Pet application provides a platform for pet owners to browse for highly
