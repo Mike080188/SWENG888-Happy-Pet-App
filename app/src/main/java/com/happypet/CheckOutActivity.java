@@ -16,6 +16,7 @@ public class CheckOutActivity extends AppCompatActivity {
     private TextView mTotalTV;
     private Button mCheckoutButton;
 
+    /** CheckOutActivity gets total passed as intent extra from CartFragment and displays it to user*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
